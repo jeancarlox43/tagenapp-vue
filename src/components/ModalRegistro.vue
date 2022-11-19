@@ -1,6 +1,6 @@
 <template>
    <!--Componente para registrar al usuario-->
-   <a class="btn btn-warning regist desconectado" data-bs-toggle="modal" data-bs-target="#registModal"  href="#" role="button">Regístrate</a>
+   <a class="btn btn-warning regist desconectado" v-if="regis" data-bs-toggle="modal" data-bs-target="#registModal"  href="#" role="button">Regístrate</a>
    
       <div class="modal fade" id="registModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -30,20 +30,30 @@
 
 <script lang="ts" setup>
 import { useRouter } from 'vue-router';
-import {ref} from 'vue'
+import {ref, onMounted} from 'vue'
 import {showMessage} from '../helpers/showMessage'
 import {Modal} from "bootstrap";
 import {auth} from '@/main'
-import {createUserWithEmailAndPassword} from 'firebase/auth'
+import {createUserWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth'
    let usuario = ref({
       email: '',
       password: '',
       confirPassword: ''
    })
+   //variable para los estados del boton registrate
+   const regis = ref(true);
 
    let router = useRouter();
   
-
+   onMounted(() => {
+    onAuthStateChanged(auth, (user) =>{
+        if(user){
+            regis.value = false;
+        }else{
+            regis.value = true;
+        }
+    })
+});
 
    const regisUser = () =>{
         createUserWithEmailAndPassword(auth, usuario.value.email, usuario.value.password).then(() =>{

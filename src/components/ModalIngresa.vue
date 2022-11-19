@@ -1,6 +1,6 @@
 <template>
     <!--Componente para ingresar al usuario-->
-    <a class="btn btn-light ingresa desconectado" data-bs-toggle="modal" data-bs-target="#ingreModal" href="#"
+    <a v-if="ingres" class="btn btn-light ingresa desconectado" data-bs-toggle="modal" data-bs-target="#ingreModal" href="#"
         role="button">Ingresa</a>
     
     <div class="modal fade" id="ingreModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -29,44 +29,54 @@
 </template>
 
 <script lang="ts" setup>
-    import { useRouter } from 'vue-router';
-    import {Modal} from "bootstrap";
-    import { ref } from 'vue';
-    import {auth} from '@/main'
-    import { signInWithEmailAndPassword } from 'firebase/auth'
-    import {showMessage} from '../helpers/showMessage'
-    
-    let usuario = ref({
-      email: '',
-      password: '',
-     
-   })
+import { useRouter } from 'vue-router';
+import { Modal } from "bootstrap";
+import { ref, onMounted } from 'vue';
+import { auth } from '@/main'
+import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
+import { showMessage } from '../helpers/showMessage'
 
-   let router = useRouter();
-    
+let usuario = ref({
+    email: '',
+    password: '',
 
-    const authUser = () =>{
-        signInWithEmailAndPassword(auth, usuario.value.email, usuario.value.password).then(() =>{
-            const modal = Modal.getInstance(document.querySelector('#ingreModal'))
-            modal.hide()
-            router.push('/inicio');
-            showMessage('Bienvenido '+ usuario.value.email)
-        })
-        .catch((error) =>{
+})
+
+//variable para los estados del boton ingresa
+const ingres = ref(true);
+
+let router = useRouter();
+
+onMounted(() => {
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            ingres.value = false;
+        } else {
+            ingres.value = true;
+        }
+    })
+});
+
+
+const authUser = () => {
+    signInWithEmailAndPassword(auth, usuario.value.email, usuario.value.password).then(() => {
+        const modal = Modal.getInstance(document.querySelector('#ingreModal'))
+        modal.hide()
+        router.push('/inicio');
+        showMessage('Bienvenido ' + usuario.value.email)
+    })
+        .catch((error) => {
             if (error.code === "auth/wrong-password") {
                 showMessage("Contraseña incorrecta", 'error');
             } else if (error.code === "auth/user-not-found") {
                 showMessage("Usuario no existe", 'error');
-                
+
             } else {
                 showMessage("Algo esta mal", "error")
             }
         });
-        
-    }
-    
 
-
+}
 
 </script>
 
