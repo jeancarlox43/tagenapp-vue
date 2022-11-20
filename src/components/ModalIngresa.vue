@@ -20,7 +20,6 @@
                         <button type="submit" class="btn btn-warning regist w-100 mb-4" @click.prevent="authUser">Ingresar</button>
     
                     </form>
-                    <button type="button" class="btn btn-warning regist">Google</button>
                 </div>
             </div>
         </div>

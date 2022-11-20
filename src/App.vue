@@ -1,14 +1,14 @@
 <template>
-    <Header/>
-    <Footer/>
+    <div class="app">
+        <Header/>
+        <Footer/>
+    </div>
 </template>
 <script lang="ts" setup>
 import Header from './components/Header.vue'
 import Footer from './components/Footer.vue'
 </script>
 <style>
-
-
 
 .ingresa{
     background: #F4F5F7;

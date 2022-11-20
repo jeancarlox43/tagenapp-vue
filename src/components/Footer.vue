@@ -1,5 +1,5 @@
 <template>
-     <footer class="footer  bg-dark text-white ">
+     <footer class="main-footer  bg-dark text-white ">
         <div class="container fluid">
             <div class="row p-3 pb-2">
                 <div class="col-xs-12 col-md-6 col-lg-4">
@@ -43,4 +43,7 @@ export default defineComponent({
 #img-footer{
     width: 80px;
 }
+
+
+
 </style>

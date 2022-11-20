@@ -1,6 +1,6 @@
 <template>
    <!--Componente para registrar al usuario-->
-   <a class="btn btn-warning regist desconectado" v-if="regis" data-bs-toggle="modal" data-bs-target="#registModal"  href="#" role="button">Regístrate</a>
+   <a class="btn btn-warning regist" v-if="regis" data-bs-toggle="modal" data-bs-target="#registModal"  href="#" role="button">Regístrate</a>
    
       <div class="modal fade" id="registModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
