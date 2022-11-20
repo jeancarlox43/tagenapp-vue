@@ -17,7 +17,7 @@
                         <input v-model="usuario.email" id="login-email" type="email" class="form-control mb-3" placeholder="Email" required>
                         <label for="password">Contraseña:</label>
                         <input v-model="usuario.password" id="login-password" type="password" class="form-control mb-3" placeholder="******" required>
-                        <button type="submit" class="btn btn-warning regist w-100 mb-4" @click.prevent="authUser">Ingresar</button>
+                        <button type="submit" class="btn btn-warning regist mb-4" @click.prevent="authUser">Ingresar</button>
     
                     </form>
                 </div>
@@ -40,6 +40,11 @@ let usuario = ref({
     password: '',
 
 })
+//variable para limpiar los datos del formulario
+let usuarioN = ref({
+    email: '',
+    password: '',
+})
 
 //variable para los estados del boton ingresa
 const ingres = ref(true);
@@ -58,11 +63,13 @@ onMounted(() => {
 
 
 const authUser = () => {
+    
     signInWithEmailAndPassword(auth, usuario.value.email, usuario.value.password).then(() => {
         const modal = Modal.getInstance(document.querySelector('#ingreModal'))
         modal.hide()
         router.push('/inicio');
         showMessage('Bienvenido ' + usuario.value.email)
+        usuario.value = usuarioN.value;
     })
         .catch((error) => {
             if (error.code === "auth/wrong-password") {
@@ -74,7 +81,7 @@ const authUser = () => {
                 showMessage("Algo esta mal", "error")
             }
         });
-
+    
 }
 
 </script>

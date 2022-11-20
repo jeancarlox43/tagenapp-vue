@@ -1,4 +1,4 @@
-# tagenapp-vue
+# Tagenapp-vue
 
 ## Project setup
 ```

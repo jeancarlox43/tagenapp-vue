@@ -29,6 +29,9 @@
                 
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
+                        <router-link v-if="login" class="nav-link" to="/inicio">Inicio</router-link>
+                    </li>
+                    <li class="nav-item">
                         <router-link v-if="login" class="nav-link" to="/chat">Mensajes</router-link>
                     </li>
                     <li class="nav-item">

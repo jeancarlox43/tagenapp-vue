@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import Inicio from '@/views/Inicio.vue'
+import Chat from '@/views/Chat.vue'
 import {showMessage} from '../helpers/showMessage'
 import { auth } from '@/main'
 import { onAuthStateChanged } from 'firebase/auth'
@@ -24,6 +25,15 @@ const routes: Array<RouteRecordRaw> = [
     path: '/inicio',
     name: 'inicio',
     component: Inicio,
+    meta:{
+      requiresAuth: true, 
+    }
+  },
+
+  {
+    path: '/chat',
+    name: 'chat',
+    component: Chat,
     meta:{
       requiresAuth: true, 
     }

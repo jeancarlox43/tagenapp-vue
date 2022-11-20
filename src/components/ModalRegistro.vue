@@ -18,9 +18,9 @@
                         <input v-model="usuario.password"  type="password" id="regis-password" class="form-control mb-3" placeholder="******" required>
 
                         <label for="confirmpassword">Confirmar Contraseña:</label>
-                        <input v-model="usuario.confirPassword" type="password" id="regis-password" class="form-control mb-3" placeholder="******" required>
+                        <input v-model="usuario.confirPassword" type="password" id="confirm-password" class="form-control mb-3" placeholder="******" required>
                         
-                        <button type="submit"   class="btn btn-warning regist" @click.prevent="regisUser">Registrar</button>
+                        <button type="submit"   class="btn btn-warning mb-4" @click.prevent="regisUser">Registrar</button>
                     </form>
                 </div>
         </div>
@@ -36,6 +36,12 @@ import {Modal} from "bootstrap";
 import {auth} from '@/main'
 import {createUserWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth'
    let usuario = ref({
+      email: '',
+      password: '',
+      confirPassword: ''
+   })
+   //variable para limpiar los datos del formulario
+   let usuarioN = ref({
       email: '',
       password: '',
       confirPassword: ''
@@ -62,6 +68,7 @@ import {createUserWithEmailAndPassword, onAuthStateChanged} from 'firebase/auth'
             modal.hide()
             router.push('/inicio');
             showMessage('Bienvenido '+ usuario.value.email)
+            usuario.value = usuarioN.value;
         })
         .catch((error) =>{
            if (error.code === 'auth/email-already-in-use') {
