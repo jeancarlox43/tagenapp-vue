@@ -36,3 +36,6 @@ npm run build
 Jean Carlos Hernandez Espinosa
 Nohelia Patricia Varela Corpas
 ```
+
+## Repositorio en github 
+(https://github.com/jeancarlox43/tagenapp-vue) 
