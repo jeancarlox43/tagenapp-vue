@@ -31,10 +31,8 @@ npm run serve
 npm run build
 ```
 
-## Desarrolladores
+##Desarrolladores
 ```
 Jean Carlos Hernandez Espinosa
 Nohelia Patricia Varela Corpas
 ```
-
-
