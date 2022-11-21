@@ -39,3 +39,6 @@ Nohelia Patricia Varela Corpas
 
 ## Repositorio en github 
 (https://github.com/jeancarlox43/tagenapp-vue) 
+
+## hosting 
+(https://crud-vue-b39fc.web.app/) 
